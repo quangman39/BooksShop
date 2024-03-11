@@ -12,9 +12,12 @@ namespace BooksShop.WebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnviroment;
+
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnviroment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnviroment = webHostEnviroment;
         }
 
         public IActionResult Index()
@@ -24,10 +27,10 @@ namespace BooksShop.WebApp.Areas.Admin.Controllers
             return View(products);
         }
 
-        public IActionResult Create()
+        public IActionResult UpSert(int? id)// combine update and insert
         {
             ProductVM obj = new()
-            {
+            { 
                 Product = new Product(),
                 CategoryList = _unitOfWork.Category.GetAll().Select(
                u => new SelectListItem
@@ -36,17 +39,60 @@ namespace BooksShop.WebApp.Areas.Admin.Controllers
                    Value = u.Id.ToString()
                })
             };
-           
-           // ViewBag.CategoryList = CategoryList;
-            return View(obj);
+
+            if (id == null || id == 0)
+            {
+            
+                return View(obj);
+            }
+            else
+            {
+                //update
+                obj.Product = _unitOfWork.Product.Get(temp => temp.Id == id);
+                if(obj.Product == null) return NotFound();
+                return View(obj);
+
+            }
+
+          
         }
 
         [HttpPost]
-        public IActionResult Create(ProductVM obj)
+        public IActionResult UpSert(ProductVM obj, IFormFile? file)//Upsert
         {
            if(ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj.Product);
+                string wwRootPath = _webHostEnviroment.WebRootPath;
+                if (file != null) { 
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string  productPath = Path.Combine(wwRootPath, @"image\product");
+
+                    if(!string.IsNullOrEmpty(obj.Product.image))
+                    {
+                        string oldImagePath = Path.Combine(wwRootPath, obj.Product.image.TrimStart('\\'));
+                        if(System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+                    }
+                    using( var fileStream = new FileStream(Path.Combine(productPath, fileName),FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                   obj.Product.image = @"\image\product\" + fileName;
+                }
+
+
+                if(obj.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Add(obj.Product);
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(obj.Product);
+
+                }
+
                 _unitOfWork.Save();
                 TempData["success"] = "Created successfull";
 
@@ -67,27 +113,7 @@ namespace BooksShop.WebApp.Areas.Admin.Controllers
 
         }
 
-        public IActionResult Edit(int id )
-        {
-
-            Product obj = _unitOfWork.Product.Get(temp => temp.Id == id);
-            return View(obj);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product product)
-        {
-            if(ModelState.IsValid)
-            {
-                _unitOfWork.Product.Update(product);
-                _unitOfWork.Save();
-                TempData["edit"] = "Edit successfull";
-
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
-
+  
         public IActionResult Delete(int id)
         {
             if (id == 0) throw new ArgumentException(nameof(Product.Id));
