@@ -22,7 +22,7 @@ namespace BooksShop.WebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> products = _unitOfWork.Product.GetAll().ToList();
+            List<Product> products = _unitOfWork.Product.GetAll("category").ToList();
            
             return View(products);
         }
@@ -48,7 +48,7 @@ namespace BooksShop.WebApp.Areas.Admin.Controllers
             else
             {
                 //update
-                obj.Product = _unitOfWork.Product.Get(temp => temp.Id == id);
+                obj.Product = _unitOfWork.Product.Get(temp => temp.Id == id, "category");
                 if(obj.Product == null) return NotFound();
                 return View(obj);
 

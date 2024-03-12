@@ -34,7 +34,7 @@
                 <td class="w-25">@product.Description</td>
                 <td>@product.ISBN</td>
                 <td >@product.Price</td>
-                <td>@product.CategoryId</td>
+                <td>@product.category.Name</td>
                 <td class="" >
                     <div class=" w-100 btn-group" role="group">
                         <a asp-area="Admin" asp-controller="product" asp-action="upsert" asp-route-id="@product.Id" class="w- btn btn-primary rounded mx-3"> Edit</a>
