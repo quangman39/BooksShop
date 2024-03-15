@@ -1,13 +1,17 @@
 ﻿using BooksShop.Models.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace BooksShop.DataAccess.Data
 {
-    public class ApplicationDbContext :DbContext
+    public class ApplicationDbContext :  IdentityDbContext<IdentityUser>
     {
         
         public DbSet<Category> categories { get; set; }
         public DbSet<Product> products { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

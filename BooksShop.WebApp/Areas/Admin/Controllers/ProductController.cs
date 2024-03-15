@@ -2,6 +2,8 @@
 using BooksShop.DataAccess.Repository.IReponsitory;
 using BooksShop.Models.Models;
 using BooksShop.Models.Models.ViewsModels;
+using BooksShop.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net;
@@ -9,6 +11,8 @@ using System.Net;
 namespace BooksShop.WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
+
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
