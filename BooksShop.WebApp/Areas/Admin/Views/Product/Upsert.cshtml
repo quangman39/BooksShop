@@ -1,14 +1,14 @@
 ﻿@model ProductVM
-<form asp-controller="product" asp-action="upsert" method="post" enctype="multipart/form-data" >
+<form asp-controller="product" asp-action="upsert" method="post" enctype="multipart/form-data">
     <input asp-for="Product.Id" hidden />
     <input asp-for="Product.image" hidden />
     <div class="border rounded p-3">
         <div class="row pb-2 ">
-           
+
             <h2> @(Model.Product.Id != 0 ? "Update" : "Create")</h2>
             <hr />
         </div>
-        <div class="row"> 
+        <div class="row">
             <div class="col-10 border rounded ">
                 <div class="pt-3">
                     <label asp-for="Product.Title" class="pb-2"></label>
@@ -81,7 +81,7 @@
             </div>
         </div>
 
-      
+
     </div>
 </form>
 

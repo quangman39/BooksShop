@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Company>;
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Company List </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="company" asp-action="UpSert" class="btn btn-primary"> Create Category</a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped mt-4 ">
+    <thead>
+        <tr>
+            <td> Title</td>
+            <td>Author</td>
+            <td>Description</td>
+            <td>ISBN</td>
+            <td>Price</td>
+            <td>Category</td>
+            <th></th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (Company company in Model)
+        {
+            <tr>
+                <td>@company.Name</td>
+                <td>@company.City</td>
+                <td >@company.StreetAddress</td>
+                <td>@company.PhoneNumber</td>
+                <td class="">@company.State</td>
+                <td>@company.PostalCode</td>
+                <td class="" >
+                    <div class=" w-100 btn-group" role="group">
+                        <a asp-area="Admin" asp-controller="company" asp-action="upsert" asp-route-id="@company.Id" class="w- btn btn-primary rounded mx-3"> Edit</a>
+                        <a asp-area="Admin" asp-controller="company" asp-action="delete" asp-route-id="@company.Id" class="btn btn-danger rounded "> Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

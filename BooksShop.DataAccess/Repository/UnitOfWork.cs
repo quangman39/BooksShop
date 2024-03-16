@@ -13,13 +13,15 @@ namespace BooksShop.DataAccess.Repository
         private ApplicationDbContext _db;
         public ICategoryReponsitory Category {  get;private set; }
         public IProductReponsitory Product {  get;private set; }
+        public ICompanyReponsitory Company {  get;private set; }
+
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Category = new CategoryReponsitory(_db);
             Product = new ProductReponsitoty(_db);
-        }
+            Company = new CompanyReponsitory(_db);        }
 
         public void Save()
         {

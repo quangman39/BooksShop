@@ -25,13 +25,17 @@
                                 <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     Content Managent
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-dark">
+                                <ul class="dropdown-menu dropdown-menu-dark ">
                                     <li class="nav-item">
-                                        <a class="nav-link text-light ms-2" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                                        <a class="nav-link dropdown-item text-light ps-2" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-light ms-2" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
+                                        <a class="nav-link dropdown-item text-light ps-2" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link dropdown-item text-light ps-2" asp-area="Admin" asp-controller="Company" asp-action="Index">Company</a>
+                                    </li>
+                                    <li> <hr class="dropdown-divider " style="border-color:white;" /></li>
                                 </ul>
                             </li>
                         }
