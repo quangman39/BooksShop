@@ -14,14 +14,18 @@ namespace BooksShop.DataAccess.Repository
         public ICategoryReponsitory Category {  get;private set; }
         public IProductReponsitory Product {  get;private set; }
         public ICompanyReponsitory Company {  get;private set; }
-
+        public IShoppingCartReponsitory ShoppingCart { get;private set; }
+        public IApplicationUserReponsitory ApplicationUser { get;private set; } 
 
         public UnitOfWork(ApplicationDbContext db)
-        {
+        { 
             _db = db;
             Category = new CategoryReponsitory(_db);
             Product = new ProductReponsitoty(_db);
-            Company = new CompanyReponsitory(_db);        }
+            Company = new CompanyReponsitory(_db); 
+            ShoppingCart = new ShoppingCartReponitory(_db);
+            ApplicationUser = new ApplicationUSerReponsitory(_db);
+        }
 
         public void Save()
         {

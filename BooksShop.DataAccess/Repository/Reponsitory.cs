@@ -42,9 +42,15 @@ namespace BooksShop.DataAccess.Repository
 
         }
 
-        public IEnumerable<T> GetAll(string? includeProperties= null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filte=null,string? includeProperties= null)
         {
             IQueryable<T> query = dbSet;
+
+            if(filte != null)
+            {
+             query = query.Where(filte);
+
+            };
             if(!string.IsNullOrEmpty(includeProperties))
             {
                 foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))

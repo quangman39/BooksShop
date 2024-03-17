@@ -26,7 +26,7 @@ namespace BooksShop.WebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> products = _unitOfWork.Product.GetAll("category").ToList();
+            List<Product> products = _unitOfWork.Product.GetAll(includeProperties:"category").ToList();
 
             return View(products);
         }

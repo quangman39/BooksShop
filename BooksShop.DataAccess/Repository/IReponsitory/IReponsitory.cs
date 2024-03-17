@@ -9,7 +9,7 @@ namespace BooksShop.DataAccess.Repository.IReponsitory
 {
     public interface IReponsitory<T> where T : class
     {
-        IEnumerable<T> GetAll(string? includeProperties = null);
+        IEnumerable<T> GetAll(Expression<Func<T, bool>>? filte =null,string? includeProperties = null);
         T Get(Expression<Func<T, bool>> filter,string? includeProperties = null);
         /// <summary>
         /// add obj in entity

@@ -11,6 +11,8 @@ namespace BooksShop.DataAccess.Repository.IReponsitory
         ICategoryReponsitory Category { get; }
         IProductReponsitory Product { get; }
         ICompanyReponsitory Company { get; }
+        IShoppingCartReponsitory ShoppingCart { get; }
+        IApplicationUserReponsitory ApplicationUser { get; }
         void Save();
     }
 }
