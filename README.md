@@ -1,7 +1,15 @@
 # Bookshop
 
 Welcome to Bookshop, a web application built with ASP.NET Core MVC, Entity Framework Core, and SQL Server. This application serves as a platform for managing and purchasing books online.
+## Folder Structure
 
+- **BooksShop.DataAccess**: Contains classes and components responsible for data access, including repository implementations, database context setup, and entity configurations.
+
+- **BooksShop.Models**: Houses domain models used throughout the application, representing entities such as books, users, orders, etc.
+
+- **BooksShop.Utility**: Contains utility classes and helper functions used across different parts of the application.
+
+- **BooksShop.WebApp**: The main entry point of the application, containing the ASP.NET Core MVC project, including controllers, views, view models, and other frontend-related components.
 ## Features
 
 - **Browse Books**: Explore a wide selection of books available in our store.
