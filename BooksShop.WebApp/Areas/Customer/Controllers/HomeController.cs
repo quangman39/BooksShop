@@ -52,6 +52,7 @@ namespace BooksShop.WebApp.Areas.Customer.Controllers
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
             }
             _unitOfWork.Save();
+            TempData["success"] = "Add Product in Cart successfully ";
             return RedirectToAction("Index");
         }
     }

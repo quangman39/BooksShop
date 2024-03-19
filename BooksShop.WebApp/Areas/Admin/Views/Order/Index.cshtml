@@ -1,0 +1,66 @@
+﻿@model List<OrderHeader>
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Order List </h2>
+        </div>
+    </div>
+</div>
+<div class="row p-4">
+    <div class="d-flex justify-content-between pb-5 pt-2">
+        <span></span>
+        <ul class="list-group list-group-horizontal-sm">
+            <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="inprocess">
+            <li class="list-group-item">In Process</li>
+            </a>
+            <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="pending">
+            <li class="list-group-item">In Pending</li>
+            </a>
+            <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="completed">
+            <li class="list-group-item">In Completed</li>
+            </a>
+            <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="approved">
+            <li class="list-group-item">Approved</li>
+            </a>
+            <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="all">
+            <li class="list-group-item">All Item</li>
+            </a>
+        </ul>
+    </div>
+
+</div>
+
+<table class="table table-bordered table-striped mt-4 ">
+    <thead>
+        <tr>
+            <td> ID </td>
+            <td>Name</td>
+            <td>Phone Number</td>
+            <td>Email</td>
+            <td>Status</td>
+            <td>Total</td>
+            <th></th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (OrderHeader product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.PhoneNumber</td>
+                <td>@product.ApplicationUser.Email</td>
+                <td>@product.OrderStatus</td>
+                <td>@product.OrderTotal</td>
+                <td class="">
+                    <div class=" w-100 btn-group" role="group">
+                        <a asp-area="Admin" asp-controller="Order" asp-action="upsert" asp-route-id="@product.Id" class="w- btn btn-secondary rounded mx-3"> Edit</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

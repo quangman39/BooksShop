@@ -5,12 +5,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using BooksShop.Utility;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaulConnection")));
+
 
 // add identity 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
@@ -42,7 +44,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecrecKey").Value;
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

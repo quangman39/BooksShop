@@ -16,6 +16,8 @@ namespace BooksShop.DataAccess.Repository
         public ICompanyReponsitory Company {  get;private set; }
         public IShoppingCartReponsitory ShoppingCart { get;private set; }
         public IApplicationUserReponsitory ApplicationUser { get;private set; } 
+        public IOrderDetailsReponsitory OrderDetails { get;private set; }
+        public IOrderHeaderReponsitory OrderHeader { get;private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         { 
@@ -25,6 +27,8 @@ namespace BooksShop.DataAccess.Repository
             Company = new CompanyReponsitory(_db); 
             ShoppingCart = new ShoppingCartReponitory(_db);
             ApplicationUser = new ApplicationUSerReponsitory(_db);
+            OrderHeader = new OrderHeaderReponsitory(_db);
+            OrderDetails = new OrderDetailsReponsitory(_db);
         }
 
         public void Save()

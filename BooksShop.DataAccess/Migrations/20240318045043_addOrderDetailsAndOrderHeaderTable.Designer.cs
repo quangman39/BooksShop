@@ -4,6 +4,7 @@ using BooksShop.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BooksShop.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240318045043_addOrderDetailsAndOrderHeaderTable")]
+    partial class addOrderDetailsAndOrderHeaderTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,23 +173,11 @@ namespace BooksShop.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Carrier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("OrderDate")
@@ -204,31 +195,11 @@ namespace BooksShop.DataAccess.Migrations
                     b.Property<DateOnly>("PaymentDueDate")
                         .HasColumnType("date");
 
-                    b.Property<string>("PaymentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentIntentId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PaymentStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SesstionId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ShipingDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TrackingNumber")
                         .HasColumnType("nvarchar(max)");

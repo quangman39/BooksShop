@@ -13,6 +13,8 @@ namespace BooksShop.DataAccess.Repository.IReponsitory
         ICompanyReponsitory Company { get; }
         IShoppingCartReponsitory ShoppingCart { get; }
         IApplicationUserReponsitory ApplicationUser { get; }
+         IOrderDetailsReponsitory OrderDetails { get;  }
+         IOrderHeaderReponsitory OrderHeader { get;  }
         void Save();
     }
 }
