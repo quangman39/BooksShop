@@ -1,4 +1,4 @@
-﻿@model List<OrderHeader>
+﻿@model IEnumerable<OrderHeader>
 
 <div class="container">
     <div class="row pt-4">
@@ -57,7 +57,7 @@
                 <td>@product.OrderTotal</td>
                 <td class="">
                     <div class=" w-100 btn-group" role="group">
-                        <a asp-area="Admin" asp-controller="Order" asp-action="upsert" asp-route-id="@product.Id" class="w- btn btn-secondary rounded mx-3"> Edit</a>
+                        <a asp-area="Admin" asp-controller="Order" asp-action="Detail" asp-route-orderId="@product.Id" class="w- btn btn-secondary rounded mx-3"> Detail</a>
                     </div>
                 </td>
             </tr>

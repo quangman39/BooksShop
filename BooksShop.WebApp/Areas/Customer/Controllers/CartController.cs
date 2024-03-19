@@ -2,6 +2,7 @@
 using BooksShop.Models.Models;
 using BooksShop.Models.Models.ViewsModels;
 using BooksShop.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
 using System.Security.Claims;
@@ -20,7 +21,7 @@ namespace BooksShop.WebApp.Areas.Customer.Controllers
         }
 
 
-
+        [Authorize]
         public IActionResult Index()
         {
 
@@ -138,7 +139,7 @@ namespace BooksShop.WebApp.Areas.Customer.Controllers
             }
             else
             { 
-                ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentSatusDelayPayment;
+                ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentSatusDelaydPayment;
                 ShoppingCartVM.OrderHeader.OrderStatus = SD.StatusApproved;
 
             }
@@ -205,7 +206,7 @@ namespace BooksShop.WebApp.Areas.Customer.Controllers
         public IActionResult OrderConfirm(int id)
         {
             OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(temp => temp.Id == id, includeProperties: "ApplicationUser");
-            if(orderHeader.PaymentStatus != SD.PaymentSatusDelayPayment)
+            if(orderHeader.PaymentStatus != SD.PaymentSatusDelaydPayment)
             { //this is an order by customer
                  var service = new SessionService();
                  Session session = service.Get(orderHeader.SesstionId);

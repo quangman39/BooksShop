@@ -23,7 +23,7 @@ namespace BooksShop.Utility
 
         public const string PaymentSatusPending = "Pending";
         public const string PaymentSatusApproved = "Approved";
-        public const string PaymentSatusDelayPayment = "ApprovedForDelayPayment";
+        public const string PaymentSatusDelaydPayment = "ApprovedForDelayPayment";
         public const string PaymentSatusRejected = "Rejected";
 
 
